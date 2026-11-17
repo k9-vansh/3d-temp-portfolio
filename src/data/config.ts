@@ -27,7 +27,7 @@ const config: PortfolioConfig = {
     "TypeScript",
   ],
   email: "k9.vansh@gmail.com",
-  site: "https://orange-bonus-7bf4.k9-vansh.workers.dev",
+  site: "https://3d-temp-portfolio.vercel.app",
 
   // Assets & Links
   resumeUrl: "/resume",
