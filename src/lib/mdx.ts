@@ -34,6 +34,7 @@ function readMDXFile(filePath: string) {
 
 export function getBlogPosts() {
   const dir = getBlogsDirectory();
+  if (!fs.existsSync(dir)) return [];
   return fs.readdirSync(dir)
     .filter((file) => path.extname(file) === ".mdx")
     .map((file) => ({
@@ -44,7 +45,9 @@ export function getBlogPosts() {
 
 export function getBlogPost(slug: string) {
   if (!/^[a-zA-Z0-9][a-zA-Z0-9_-]*$/.test(slug)) return null;
-  const filePath = path.join(getBlogsDirectory(), `${slug}.mdx`);
+  const dir = getBlogsDirectory();
+  if (!fs.existsSync(dir)) return null;
+  const filePath = path.join(dir, `${slug}.mdx`);
   try {
     return readMDXFile(filePath);
   } catch (error) {
