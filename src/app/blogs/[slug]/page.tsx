@@ -10,6 +10,9 @@ import RevealAnimation from "@/components/reveal-animations";
 
 export async function generateStaticParams() {
   const posts = getBlogPosts();
+  if (posts.length === 0) {
+    return [{ slug: "_placeholder" }];
+  }
   return posts.map((post) => ({
     slug: post.slug,
   }));
@@ -18,7 +21,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = getBlogPost(slug);
-  if (!post) notFound();
+  if (!post) return { title: "Blog Post | Portfolio" };
   return {
     title: `${post.metadata.title} | Portfolio`,
     description: post.metadata.summary,

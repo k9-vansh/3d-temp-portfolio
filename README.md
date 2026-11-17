@@ -1,8 +1,8 @@
 <div align="center">
 
-# 🚀 3D Portfolio
+# 🚀 3D Portfolio Template
 
-**A developer portfolio you can actually play with.** Press keys on a 3D keyboard, watch other visitors' cursors fly by, and chat with whoever's online.
+**A fully customizable, high-performance 3D developer portfolio template.** Press keys on an interactive 3D keyboard mapped to your skills, show off your work with animated project modals, and optionally enable multiplayer live cursors and realtime chat.
 
 ### [✨ Live Demo → nareshkhatri.dev](https://nareshkhatri.dev)
 
@@ -13,35 +13,39 @@
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Naresh-Khatri/3d-portfolio)
 
-<!-- swap for demo video: drag an .mp4 into the GitHub web editor, paste the user-attachments URL on its own line here -->
 ![Portfolio Preview](https://github.com/Naresh-Khatri/3d-portfolio/blob/main/public/assets/projects-screenshots/portfolio/landing.png?raw=true)
 
 </div>
 
-> **Free to use!** This portfolio is open source. If you use it, a credit/link back would be really appreciated 🙏
+> **Free to use!** This portfolio template is open source under the MIT License. If you use it, a credit/link back to the original author ([Naresh Khatri](https://github.com/Naresh-Khatri/3d-portfolio)) is greatly appreciated! 🙏
+
+---
 
 ## ✨ Features
 
-- **Interactive 3D Keyboard** — Programmatically generated Chibi keyboard where each keycap represents a skill, revealing titles and descriptions on hover/press. Try colors, logos, and layouts in the [Chibi keycap customizer](https://chibi.nareshkhatri.dev/demo/keycaps).
-- **Live Multiplayer** — See other visitors' cursors in realtime, who's online, and chat with them ([details](#-realtime-features-optional))
-- **Buttery Animations** — GSAP + Framer Motion powered scroll, hover, and reveal animations
-- **Space Theme** — Floating particles on a dark canvas for a cosmic vibe
-- **Easter Eggs** — Open DevTools and follow the clues 🐱
-- **Light & Dark Mode** — Full theme support with cheeky disclaimer toasts
-- **Responsive** — Works across all screen sizes
-- **Contact Form** — Email delivery via Resend
-- **Analytics** _(optional)_ — Umami analytics integration
+- **Interactive 3D Keyboard** — Programmatically generated Chibi 3D keyboard where each keycap represents a skill, revealing titles and descriptions on hover/press. Supports custom logos, colors, shortcuts, and columns.
+- **Data-Driven Architecture** — Customize your entire portfolio (name, hero, experience, skills, projects, contact info, SEO) by editing simple TypeScript configuration files without modifying React components.
+- **Section Toggles** — Turn any section (Hero, Skills, Experience, Projects, Contact) on or off in configuration without breaking 3D animations or leaving empty layout gaps.
+- **Live Multiplayer (Optional)** — See other visitors' cursors in realtime, check who's online, and chat with them when connected to a WebSocket backend.
+- **Fluid Animations** — Powered by GSAP and Framer Motion for smooth scroll effects, keycap drops, and interactive reveals.
+- **Space Theme** — Interactive particle field on a dark canvas.
+- **Light & Dark Mode** — Full theme support with disclaimer toasts.
+- **Contact Form** — Email delivery via Resend with built-in validation and graceful fallback when credentials are not set.
+- **SEO Ready** — Comprehensive Open Graph, Twitter cards, metadata, dynamic sitemap, and robots.txt.
+
+---
 
 ## 🛠️ Tech Stack
 
 | Layer | Technologies |
 |---|---|
-| **Framework** | Next.js 16.2.2, React 19.2.4, TypeScript |
+| **Framework** | Next.js 16 (App Router), React 19, TypeScript |
 | **Styling** | Tailwind CSS, Shadcn UI, Aceternity UI |
-| **Animation** | GSAP, Framer Motion |
-| **3D** | @chibi3d/runtime, Three.js, React Three Fiber |
+| **Animation** | GSAP 3, Framer Motion (`motion/react`) |
+| **3D & WebGL** | `@chibi3d/runtime`, Three.js |
 | **Email** | Resend |
-| **Misc** | Lenis (smooth scroll), Zod, next-themes |
+| **Smooth Scroll** | Lenis |
+| **Form Validation** | Zod |
 
 ---
 
@@ -49,161 +53,279 @@
 
 ### Prerequisites
 
-- Node.js 20.9+ for Next.js 16; use a current LTS release with pnpm 11
-- pnpm 11.20.0
+- Node.js `20.9.0` or higher
+- `pnpm` (version 10 or 11 recommended): `npm install -g pnpm`
 
 ### Installation
 
 1. **Clone the repository:**
-
-    ```bash
-    git clone https://github.com/Naresh-Khatri/3d-portfolio.git
-    cd 3d-portfolio
-    ```
+   ```bash
+   git clone https://github.com/Naresh-Khatri/3d-portfolio.git
+   cd 3d-portfolio
+   ```
 
 2. **Install dependencies:**
-
-    ```bash
-    pnpm install
-    ```
+   ```bash
+   pnpm install
+   ```
 
 3. **Set up environment variables:**
-
-    Copy `.env.example` to `.env.local` and fill in the values:
-
-    ```bash
-    cp .env.example .env.local
-    ```
-
-    | Variable | Required | Description |
-    |---|---|---|
-    | `RESEND_API_KEY` | Yes | API key from [Resend](https://resend.com) for the contact form |
-    | `NEXT_PUBLIC_WS_URL` | No | WebSocket server URL for realtime features (cursors, chat, presence) |
-    | `UMAMI_DOMAIN` | No | Umami analytics script URL |
-    | `UMAMI_SITE_ID` | No | Umami website ID |
+   ```bash
+   cp .env.example .env.local
+   ```
 
 4. **Run the development server:**
+   ```bash
+   pnpm dev
+   ```
 
-    ```bash
-    pnpm dev
-    ```
-
-5. Open [http://localhost:3000](http://localhost:3000) and see the magic ✨
+5. Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
 
 ---
 
-## Code checks
+## 🎨 Customization Guide
 
-Run these before opening a pull request:
+All portfolio content is decoupled from presentation components. You can customize the entire site by editing three primary configuration files:
 
-```bash
-pnpm lint
-pnpm typecheck
+```
+src/
+  data/
+    config.ts      <-- Personal details, Hero copy, CTAs, SEO, social links, section toggles
+    constants.ts   <-- 3D Keyboard skills, colors, key bindings, and work experience
+    projects.tsx   <-- Projects, descriptions, screenshots, and tech tags
 ```
 
-Next.js 16 no longer runs lint during builds. The ESLint CLI uses `eslint.config.mjs`. New React Compiler diagnostics for refs, immutability, effect state updates, and manual memoization report warnings while existing animation and realtime components are migrated. Hook ordering violations remain errors.
-
-Blog frontmatter requires a title, summary, and `publishedAt` date in `YYYY-MM-DD` format. Optional fields are `image`, `author`, and a list of `tags`. Invalid frontmatter raises a content error; unknown blog slugs return a 404.
-
-Files under `public/assets` can be replaced at the same URL and cache for one hour before revalidation. Next.js content-hashed static assets retain immutable caching.
-
 ---
 
-## 🎨 Make It Your Own
+### 1. Personal Information & Hero (`src/data/config.ts`)
 
-All personal info is centralized in [`src/data/config.ts`](src/data/config.ts). Edit this single file to rebrand the portfolio:
+Open `src/data/config.ts` to configure your identity, hero banner, and social profiles:
 
 ```ts
-const config = {
-  title: "Your Name | Your Title",
-  description: {
-    long: "Your long description for SEO...",
-    short: "Your short description...",
-  },
-  keywords: ["your", "keywords"],
+import { PortfolioConfig } from "@/types/portfolio";
+
+const config: PortfolioConfig = {
+  // Author & Display Names
   author: "Your Name",
+  displayName: "Your Name",             // Used in Hero header & Résumé view
+  title: "Your Name | Full-Stack Developer",
+  
+  // Hero section customizable text & CTAs
+  greeting: "Hi, I am",
+  subtitle: "A Full Stack Web Developer",
+  hero: {
+    greeting: "Hi, I am",
+    subtitle: "A Full Stack Web Developer",
+    cta: {
+      primary: {
+        label: "Resume",
+        href: "https://your-resume-link.pdf",
+      },
+      secondary: {
+        label: "Hire Me",
+        href: "#contact",
+      },
+    },
+  },
+
+  // Contact & Website
   email: "you@example.com",
   site: "https://yoursite.com",
 
-  // GitHub stars button in the header
-  githubUsername: "your-github-username",
-  githubRepo: "your-repo-name",
+  // Assets
+  resumePdfPath: "/Your_Resume.pdf",    // Placed in /public
+  profileImage: "/assets/me.jpg",
 
+  // Social Links (any non-empty links are automatically rendered)
   social: {
-    twitter: "https://x.com/you",
-    linkedin: "https://linkedin.com/in/you",
-    instagram: "https://instagram.com/you",
-    facebook: "https://facebook.com/you",
-    github: "https://github.com/you",
+    github: "https://github.com/yourusername",
+    linkedin: "https://linkedin.com/in/yourusername",
+    twitter: "https://x.com/yourusername",
+    instagram: "https://instagram.com/yourusername",
+    facebook: "",
+    youtube: "",
+    discord: "",
+  },
+
+  // Optional Section Toggles: enable or disable sections
+  sections: {
+    hero: true,
+    skills: true,
+    experience: true,
+    projects: true,
+    contact: true,
+  },
+
+  // SEO metadata
+  description: {
+    long: "Your detailed portfolio overview for search engines...",
+    short: "Your short summary for social cards...",
+  },
+  keywords: ["developer", "portfolio", "full-stack", "react", "nextjs"],
+
+  // GitHub stars button in the header (leave empty to hide)
+  githubUsername: "yourusername",
+  githubRepo: "3d-portfolio",
+
+  get ogImg() {
+    return this.site + "/assets/seo/og-image.png";
   },
 };
+
+export { config };
 ```
 
-Other files you'll want to customize:
+---
 
-| File | What to change |
-|---|---|
-| `src/data/projects.tsx` | Your projects, screenshots, descriptions, and tech stacks |
-| `src/data/constants.ts` | Skills list (name, description, icon) and work experience |
-| `public/assets/` | Your images, OG image, and project screenshots |
+### 2. Interactive 3D Keyboard & Skills (`src/data/constants.ts`)
+
+The 3D keyboard dynamically builds its keycaps from the `SKILLS` record in `src/data/constants.ts`. The order of skills dictates the physical layout on the keyboard (6 keys per row by default).
+
+Each skill accepts:
+- `label`: Name of the skill displayed on screen.
+- `shortDescription`: Catchphrase or description displayed when hovering or pressing the keycap.
+- `color`: Accent color for hover glows and badges.
+- `icon`: 2D SVG icon URL or path.
+- `keyboardColor`: Plastic color of the 3D keycap in WebGL.
+- `keyboardIcon`: Vector SVG displayed on the top face of the 3D keycap (placed in `/public/assets/keyboard/logos/` or external SVG).
+- `shortcut`: Physical keyboard key code (e.g. `KeyA`, `KeyS`, `KeyD`).
+
+Example skill entry:
+```ts
+[SkillNames.REACT]: {
+  id: 3,
+  name: "react",
+  label: "React",
+  shortDescription: "Declarative component-driven UI library",
+  color: "#61dafb",
+  icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+  keyboardIcon: "/assets/keyboard/logos/react.svg",
+  keyboardColor: "#00cce8",
+  shortcut: "KeyR",
+},
+```
+
+> [!TIP]
+> **Adding or Removing Skills:** You can add or remove entries from `SKILLS`. The keyboard layout engine in `@chibi3d/runtime` dynamically recalculates key wells, rows, and camera bounds.
 
 ---
 
-## ⌨️ Customize the 3D keyboard
+### 3. Work Experience (`src/data/constants.ts`)
 
-Try colors, logos, and layouts in the [Chibi keycap customizer](https://chibi.nareshkhatri.dev/demo/keycaps), then apply your choices to `SKILLS` in [`src/data/constants.ts`](src/data/constants.ts):
+Work experience is stored in the `EXPERIENCE` array in `src/data/constants.ts`:
 
-- `keyboardColor`: keycap color, such as `"#ff9408"`.
-- `keyboardIcon`: copy an SVG URL from [thesvg.org](https://thesvg.org) and paste it here. You can also use a local file under `public/assets/keyboard/logos/`.
-- `label` and `shortDescription`: text shown when interacting with a key.
-- `shortcut`: optional physical key code, such as `"KeyQ"`. Keep shortcuts unique; defaults follow QWERTY letter order.
-
-The demo accepts logo names too, but `keyboardIcon` needs an image URL or local asset path. Without keyboard overrides, keys use the skill's `color` and `icon`.
-
-Keys follow the order of `SKILLS`. To change the default six columns, pass a second argument to `createKeyboardScene` in [`keyboard-scene.tsx`](src/components/keyboard/keyboard-scene.tsx). Rows adjust automatically to the skill count.
-
----
-
-## 🔌 Realtime Features (Optional)
-
-The portfolio supports optional realtime features powered by a **separate backend API**:
-
-- 🖱️ **Live cursors** — See other visitors' cursors in realtime
-- 👥 **Online presence** — Shows who's currently on the site
-- 💬 **Chat** — Live chat between visitors
-- **Zombie Survival** with multiplayer and leaderboards on the live site.
-
-These features activate automatically when the `NEXT_PUBLIC_WS_URL` environment variable is set. Without it, the portfolio works perfectly fine as a static site — no realtime features, no backend dependency.
-
-> [!NOTE]
-> The backend API is **not open source**. This is intentional! Too many people have cloned the portfolio and claimed they built it from scratch. The realtime server stays private to keep the live experience unique and make it stand out.
-
+```ts
+export const EXPERIENCE: Experience[] = [
+  {
+    id: 1,
+    periods: [
+      { start: "Jan 2024", end: "Present" },
+    ],
+    title: "Senior Software Engineer",
+    company: "Tech Corp · Remote",
+    description: [
+      "Led migration of legacy services to Next.js and serverless microservices.",
+      "Optimized WebGL rendering pipeline, improving frame rates by 40%.",
+    ],
+    skills: [
+      SkillNames.NEXTJS,
+      SkillNames.REACT,
+      SkillNames.TS,
+    ],
+  },
+];
+```
 
 ---
 
-## 🚀 Deployment
+### 4. Projects (`src/data/projects.tsx`)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Naresh-Khatri/3d-portfolio)
+Projects are listed in `src/data/projects.tsx`. Each project defines metadata, screenshots, categorized tech chips, and rich modal content:
 
-This site is deployed on **Vercel**. To deploy your own:
-
-1. Push your code to a GitHub repository
-2. Connect the repository to [Vercel](https://vercel.com)
-3. Add your environment variables in the Vercel dashboard
-4. Vercel handles the rest — automatic deployments on every push
+```tsx
+{
+  id: "my-project",
+  category: "Full Stack Application",
+  title: "My Project",
+  src: "/assets/projects-screenshots/my-project/landing.png",
+  screenshots: ["landing.png"],
+  skills: {
+    frontend: [PROJECT_SKILLS.next, PROJECT_SKILLS.react, PROJECT_SKILLS.tailwind],
+    backend: [PROJECT_SKILLS.node, PROJECT_SKILLS.postgres],
+  },
+  live: "https://myproject.com",
+  github: "https://github.com/myusername/my-project",
+  get content() {
+    return (
+      <div>
+        <TypographyP className="font-mono text-2xl text-center">
+          Summary of your project.
+        </TypographyP>
+        <ProjectsLinks live={this.live} repo={this.github} />
+        {/* Additional headings, paragraphs, and SlideShow components */}
+      </div>
+    );
+  },
+}
+```
 
 ---
 
-## 🤝 Contributing
+### 5. Replacing Assets & Résumé
 
-If you'd like to contribute or suggest improvements, feel free to open an issue or submit a pull request. All contributions are welcome!
+Place your personal assets in `public/`:
+- **Résumé:** Drop your PDF in `public/` (e.g. `public/Your_Resume.pdf`) and set `resumePdfPath: "/Your_Resume.pdf"` in `src/data/config.ts`.
+- **Profile Image:** Replace `public/assets/me.jpg`.
+- **Open Graph Preview:** Replace `public/assets/seo/og-image.png`.
+- **Project Screenshots:** Add folders under `public/assets/projects-screenshots/<project-id>/`.
 
 ---
 
-## 📄 License
+## 🔐 Environment Variables
 
-This project is open source and available under the [MIT License](LICENSE).
+Create a `.env.local` file from `.env.example`:
 
-If you use this portfolio, a credit or link back to the [original repo](https://github.com/Naresh-Khatri/3d-portfolio) would be much appreciated ❤️
+| Variable | Required | Description |
+|---|---|---|
+| `RESEND_API_KEY` | Optional | API key from [Resend](https://resend.com) to enable email delivery from the contact form. If unset, the site builds and runs normally without crashing. |
+| `NEXT_PUBLIC_WS_URL` | Optional | WebSocket server endpoint for realtime cursors, online user presence, and chat. Leave blank to disable realtime features. |
+| `NEXT_PUBLIC_GA_ID` | Optional | Google Analytics tracking ID (e.g. `G-XXXXXXXXXX`). |
+| `UMAMI_DOMAIN` | Optional | Self-hosted Umami script URL. |
+| `UMAMI_SITE_ID` | Optional | Umami website ID. |
+| `NEXT_PUBLIC_LEGACY_HOST` | Optional | Previous domain to display a one-time migration banner. |
 
-Note on analytics: a deployed copy reports its own hostname once per browser (nothing else — no visitor, page, or referrer data) so I can see where the template gets used.
+---
+
+## 🚢 Deployment
+
+### Deploy to Vercel (Recommended)
+
+1. Push your repository to GitHub.
+2. Import the project on [Vercel](https://vercel.com/new).
+3. Set your environment variables (e.g. `RESEND_API_KEY`).
+4. Click **Deploy**.
+
+### Production Build & Verification
+
+```bash
+# Typecheck
+pnpm typecheck
+
+# Lint check
+pnpm lint
+
+# Production build
+pnpm build
+
+# Start production server
+pnpm start
+```
+
+---
+
+## 📄 License & Attribution
+
+This project is licensed under the [MIT License](LICENSE).
+
+Original project created and maintained by **[Naresh Khatri](https://github.com/Naresh-Khatri)** ([nareshkhatri.dev](https://nareshkhatri.dev)).
+If you build something with this template, please keep attribution and link back to the original repository.

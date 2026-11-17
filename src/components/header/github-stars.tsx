@@ -5,7 +5,7 @@ import { GitHubStarsButton } from "../ui/shadcn-io/github-stars-button";
 export default async function GitHubStars({ className }: { className?: string }) {
   if (!config.githubUsername || !config.githubRepo) return null;
 
-  let stars: number;
+  let stars: number | null = null;
   try {
     stars = await getGithubStars();
   } catch (err) {
@@ -13,6 +13,8 @@ export default async function GitHubStars({ className }: { className?: string })
     console.error(err);
     return null;
   }
+
+  if (stars === null || stars === undefined) return null;
 
   return (
     <GitHubStarsButton

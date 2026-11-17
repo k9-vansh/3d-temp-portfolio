@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
 import { Button } from "../ui/button";
-import { File, Github, Linkedin } from "lucide-react";
+import { File } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -18,6 +18,21 @@ import SectionWrapper from "../ui/section-wrapper";
 
 const HeroSection = () => {
   const { isLoading } = usePreloader();
+
+  const nameParts = (config.displayName || config.author || "").trim().split(/\s+/);
+  const firstName = nameParts[0] || "";
+  const restName = nameParts.slice(1).join(" ");
+
+  const greeting = config.hero?.greeting || config.greeting || "Hi, I am";
+  const subtitle = config.hero?.subtitle || config.subtitle || "A Full Stack Web Developer";
+  const primaryCta = config.hero?.cta?.primary || {
+    label: "Resume",
+    href: config.resumeUrl || "/resume",
+  };
+  const secondaryCta = config.hero?.cta?.secondary || {
+    label: "Hire Me",
+    href: "#contact",
+  };
 
   return (
     <SectionWrapper id="hero" className={cn("relative w-full h-screen")}>
@@ -40,35 +55,28 @@ const HeroSection = () => {
                       "cursor-default sm:text-xl md:text-xl whitespace-nowrap bg-clip-text "
                     )}
                   >
-                    Hi, I am
+                    {greeting}
                     <br className="md:hidden" />
                   </p>
                 </BlurIn>
 
                 <BlurIn delay={1}>
-                  <Tooltip delayDuration={300}>
-                    <TooltipTrigger asChild>
-                      <h1
-                        className={cn(
-                          "-ml-[6px] leading-none text-transparent text-slate-800 text-left",
-                          "font-bold text-7xl md:text-7xl lg:text-8xl xl:text-9xl",
-                          "cursor-default text-edge-outline font-display "
-                        )}
-                      >
-                        {config.author.split(" ")[0]}
-                        <br className="md:block hiidden" />
-                        {config.author.split(" ")[1]}
-                      </h1>
-                    </TooltipTrigger>
-                    <TooltipContent
-                      side="top"
-                      className="dark:bg-white dark:text-black"
-                    >
-                      theres something waiting for you in devtools
-                    </TooltipContent>
-                  </Tooltip>
+                  <h1
+                    className={cn(
+                      "-ml-[6px] leading-none text-transparent text-slate-800 text-left",
+                      "font-bold text-7xl md:text-7xl lg:text-8xl xl:text-9xl",
+                      "cursor-default text-edge-outline font-display "
+                    )}
+                  >
+                    {firstName}
+                    {restName && (
+                      <>
+                        <br className="md:block hidden" />
+                        {restName}
+                      </>
+                    )}
+                  </h1>
                 </BlurIn>
-                {/* <div className="md:block hidden bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0 w-screen h-px animate-fade-right animate-glow" /> */}
                 <BlurIn delay={1.2}>
                   <p
                     className={cn(
@@ -76,34 +84,32 @@ const HeroSection = () => {
                       "cursor-default sm:text-xl md:text-xl whitespace-nowrap bg-clip-text "
                     )}
                   >
-                    A Full Stack Web Developer
+                    {subtitle}
                   </p>
                 </BlurIn>
               </div>
               <div className="mt-8 flex flex-col gap-3 w-fit">
                 <Link
-                  href={
-                    "https://drive.google.com/file/d/1MTSsUA8V7Po2AsNXT8kZ5sLOpzC8l7qm/view?usp=sharing"
-                  }
-                  target="_blank"
+                  href={primaryCta.href}
+                  target={primaryCta.href.startsWith("http") ? "_blank" : undefined}
                   className="flex-1"
                 >
-                  <BoxReveal delay={2} width="100%" >
+                  <BoxReveal delay={2} width="100%">
                     <Button className="flex items-center gap-2 w-full">
                       <File size={24} />
-                      <p>Resume</p>
+                      <p>{primaryCta.label}</p>
                     </Button>
                   </BoxReveal>
                 </Link>
                 <div className="md:self-start flex gap-3">
                   <Tooltip delayDuration={300}>
                     <TooltipTrigger asChild>
-                      <Link href={"#contact"}>
+                      <Link href={secondaryCta.href}>
                         <Button
                           variant={"outline"}
                           className="block w-full overflow-hidden"
                         >
-                          Hire Me
+                          {secondaryCta.label}
                         </Button>
                       </Link>
                     </TooltipTrigger>
@@ -112,32 +118,38 @@ const HeroSection = () => {
                     </TooltipContent>
                   </Tooltip>
                   <div className="flex items-center h-full gap-2">
-                    <Link
-                      href={config.social.twitter}
-                      target="_blank"
-                    >
-                      <Button variant={"outline"}>
-                        <SiX size={24} />
-                      </Button>
-                    </Link>
-                    <Link
-                      href={config.social.github}
-                      target="_blank"
-                      className="cursor-can-hover"
-                    >
-                      <Button variant={"outline"}>
-                        <SiGithub size={24} />
-                      </Button>
-                    </Link>
-                    <Link
-                      href={config.social.linkedin}
-                      target="_blank"
-                      className="cursor-can-hover"
-                    >
-                      <Button variant={"outline"}>
-                        <SiLinkedin size={24} />
-                      </Button>
-                    </Link>
+                    {config.social.twitter && (
+                      <Link
+                        href={config.social.twitter}
+                        target="_blank"
+                      >
+                        <Button variant={"outline"}>
+                          <SiX size={24} />
+                        </Button>
+                      </Link>
+                    )}
+                    {config.social.github && (
+                      <Link
+                        href={config.social.github}
+                        target="_blank"
+                        className="cursor-can-hover"
+                      >
+                        <Button variant={"outline"}>
+                          <SiGithub size={24} />
+                        </Button>
+                      </Link>
+                    )}
+                    {config.social.linkedin && (
+                      <Link
+                        href={config.social.linkedin}
+                        target="_blank"
+                        className="cursor-can-hover"
+                      >
+                        <Button variant={"outline"}>
+                          <SiLinkedin size={24} />
+                        </Button>
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>

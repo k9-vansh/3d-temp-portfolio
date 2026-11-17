@@ -110,26 +110,33 @@ const ExperienceCard = ({
             ))}
           </ul>
 
-          <div className="flex flex-wrap gap-2">
-            {experience.skills.map((skillName) => {
-              const skill = SKILLS[skillName as SkillNames];
-              return (
-                <Badge
-                  key={skillName}
-                  variant="outline"
-                  className="gap-1.5 text-xs font-normal text-muted-foreground bg-secondary/30 border-transparent"
-                >
-                  {/* mono until card hover -> less noise across 10+ logos */}
-                  <img
-                    src={skill.icon}
-                    alt=""
-                    className="w-3.5 h-3.5 object-contain grayscale opacity-60 transition duration-300 group-hover:grayscale-0 group-hover:opacity-100"
-                  />
-                  {skill.label}
-                </Badge>
-              );
-            })}
-          </div>
+          {experience.skills && experience.skills.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {experience.skills.map((skillName) => {
+                const skill = SKILLS[skillName as SkillNames];
+                if (!skill) {
+                  return (
+                    <Badge
+                      key={skillName}
+                      variant="outline"
+                      className="gap-1.5 text-xs font-normal text-muted-foreground bg-secondary/30 border-transparent"
+                    >
+                      {skillName}
+                    </Badge>
+                  );
+                }
+                return (
+                  <Badge
+                    key={skillName}
+                    variant="outline"
+                    className="gap-1.5 text-xs font-normal text-muted-foreground bg-secondary/30 border-transparent"
+                  >
+                    {skill.label}
+                  </Badge>
+                );
+              })}
+            </div>
+          )}
         </CardContent>
       </Card>
     </motion.div>

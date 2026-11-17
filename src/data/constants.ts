@@ -1,5 +1,7 @@
-// thoda zada ts ho gya idhar
-// order = keycap layout, 6 per row
+/**
+ * Skill identifiers for the portfolio and 3D keyboard.
+ * Order in SKILLS determines the keycap layout on the 3D keyboard (6 keys per row).
+ */
 export enum SkillNames {
   JS = "js",
   TS = "ts",
@@ -26,18 +28,29 @@ export enum SkillNames {
   PROXMOX = "proxmox",
   STEAM = "steam",
 }
+
+/**
+ * Skill configuration interface.
+ * Defines both the 2D HTML presentation and the interactive 3D keycap rendering.
+ */
 export type Skill = {
+  /** Numeric identifier for ordering */
   id: number;
+  /** Internal key name matching SkillNames */
   name: string;
+  /** Human-readable skill label displayed on screen */
   label: string;
+  /** Fun or informative description shown when key is hovered/pressed */
   shortDescription: string;
+  /** HTML brand accent color (used for hover glows and badge styling) */
   color: string;
+  /** URL or path to skill icon (e.g. devicon SVG or local path) */
   icon: string;
-  /** Optional local artwork for the 3D key; falls back to icon. */
+  /** Optional local vector logo for the 3D keycap surface; falls back to icon */
   keyboardIcon?: string;
-  /** Plastic color of the 3D keycap; independent of the HTML brand accent. */
+  /** Plastic hex color of the 3D keycap model; independent of the 2D brand accent */
   keyboardColor?: string;
-  /** Browser KeyboardEvent.code, e.g. KeyJ. Defaults to the displayed key order. */
+  /** Browser KeyboardEvent.code (e.g. KeyJ, KeyA). Defaults to the displayed key order */
   shortcut?: string;
 };
 export const SKILLS: Record<SkillNames, Skill> = {
@@ -289,63 +302,65 @@ using use = useUsing("use")`,
   },
 };
 
+/**
+ * Work experience entry configuration.
+ */
 export type Experience = {
+  /** Unique numeric ID for keying */
   id: number;
-  // multiple periods = returning stint, avoids a duplicate card
+  /** Employment periods (multiple periods support returning stints without duplicate cards) */
   periods: { start: string; end: string }[];
+  /** Job title / role */
   title: string;
+  /** Company name and location (e.g. "Acme Corp · Remote") */
   company: string;
+  /** Bullet points detailing accomplishments and responsibilities */
   description: string[];
-  skills: SkillNames[];
+  /** Skills or technologies utilized (keys from SKILLS or custom strings) */
+  skills: (SkillNames | string)[];
 };
 
 export const EXPERIENCE: Experience[] = [
   {
     id: 1,
     periods: [
-      { start: "Oct 2026", end: "Present" },
-      { start: "Apr 2022", end: "Dec 2024" },
+      { start: "2018", end: "Present" },
     ],
-    title: "Freelance Full Stack Developer",
-    company: "Self-employed · Remote",
+    title: "Town Hall 14 Base Architect",
+    company: "Clash of Clans · Global",
     description: [
-      "Leading the build of an audit, tax and secretarial platform for a Malaysian CA firm.",
-      "Shipped 12+ client projects solo, from the first scoping call to deploy and handover.",
-      "Replaced spreadsheet workflows with dashboards, cutting weekly reporting from 6h to 30m.",
-      "Built admin panels and CMSs so non-technical clients could stop emailing me for edits.",
-      "Ran client infra on Docker, Nginx and Cloudflare at 99.9% uptime with nightly backups.",
+      "Coordinated high-stakes clan war league offensives across opposing global time zones with zero formal management background.",
+      "Maxed out defensive walls and hero levels through multiple economic shifts without paying for gold passes.",
+      "Calculated complex troop pathing and spell placements under severe time pressure to secure clutch three-star victories.",
+      "Consistently removed inactive clan members within thirty minutes of season conclusion to uphold elite competitive standards.",
     ],
-    skills: [
-      SkillNames.NEXTJS,
-      SkillNames.REACT,
-      SkillNames.NODEJS,
-      SkillNames.POSTGRES,
-      SkillNames.TAILWIND,
-      SkillNames.DOCKER,
-      SkillNames.CLOUDFLARE,
-    ],
+    skills: [],
   },
   {
     id: 2,
-    periods: [{ start: "Dec 2024", end: "Oct 2026" }],
-    title: "Full Stack Developer",
-    company: "OmniNexus Sdn Bhd · Kuala Lumpur",
+    periods: [{ start: "2023", end: "Present" }],
+    title: "Meme Coin Liquidity Specialist",
+    company: "Decentralized Casino · Remote",
     description: [
-      "Built an in-browser image editor from scratch and cancelled a $6k/year SaaS plan.",
-      "Scaled the AI job pipeline to 3k+ tasks a day, with retries keeping failures under 1%.",
-      "Cut image load times by 45% with resized variants, AVIF and smarter CDN caching.",
-      "Rewrote slow database queries, taking key dashboards from 4s to under 600ms.",
-      "Shipped 30+ features end-to-end and set up CI with preview deploys for every PR.",
+      "Bought local tops and surrendered generational bottoms with sub-second execution accuracy across decentralized exchanges.",
+      "Conducted extensive technical due diligence on whitepapers for tokens whose primary utility was a generative dog wearing headgear.",
+      "Allocated high-conviction capital across seven distinct animal tokens to distribute catastrophic downside exposure.",
+      "Exhibited unwavering composure and reassurance in telegram voice chats while ninety percent underwater on initial positions.",
     ],
-    skills: [
-      SkillNames.NEXTJS,
-      SkillNames.TS,
-      SkillNames.REACT,
-      SkillNames.NODEJS,
-      SkillNames.MONGODB,
-      SkillNames.DOCKER,
-      SkillNames.GCP,
+    skills: [],
+  },
+  {
+    id: 3,
+    periods: [{ start: "2022", end: "Present" }],
+    title: "Lifestyle Architect & Digital Larper",
+    company: "Instagram & X · Remote",
+    description: [
+      "Strategically positioned cold brew coffee cups adjacent to open terminal windows to communicate rigorous productivity.",
+      "Engaged in heated philosophical debates in comments sections regarding software frameworks never deployed to production.",
+      "Liked morning mindset and discipline videos at five in the morning before falling back asleep until midday.",
+      "Published profound one-liners about compound interest and stoicism directly from an unmade bed.",
     ],
+    skills: [],
   },
 ];
 

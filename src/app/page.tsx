@@ -9,17 +9,26 @@ import ExperienceSection from "@/components/sections/experience";
 import ProjectsSection from "@/components/sections/projects";
 import ContactSection from "@/components/sections/contact";
 import HeroSection from "@/components/sections/hero";
+import { config } from "@/data/config";
 
 function MainPage() {
+  const sections = config.sections ?? {
+    hero: true,
+    skills: true,
+    experience: true,
+    projects: true,
+    contact: true,
+  };
+
   return (
     <SmoothScroll>
       <AnimatedBackground />
       <main className={cn("bg-slate-100 dark:bg-transparent canvas-overlay-mode")}>
-        <HeroSection />
-        <SkillsSection />
-        <ExperienceSection />
-        <ProjectsSection />
-        <ContactSection />
+        {sections.hero !== false && <HeroSection />}
+        {sections.skills !== false && <SkillsSection />}
+        {sections.experience !== false && <ExperienceSection />}
+        {sections.projects !== false && <ProjectsSection />}
+        {sections.contact !== false && <ContactSection />}
       </main>
     </SmoothScroll>
   );

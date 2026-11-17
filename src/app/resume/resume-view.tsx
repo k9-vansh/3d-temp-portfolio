@@ -6,11 +6,13 @@ import { motion } from "motion/react";
 import { Download, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ResumeDoodle from "./resume-doodle";
+import { config } from "@/data/config";
 
-// Drop the compiled PDF here: frontend/public/Naresh_Khatri_Resume.pdf
-const RESUME_PATH = "/Naresh_Khatri_Resume.pdf";
+const RESUME_PATH = config.resumePdfPath || "/Naresh_Khatri_Resume.pdf";
 
 export default function ResumeView() {
+  const authorName = config.displayName || config.author;
+
   return (
     <div className="flex min-h-screen flex-col font-sans">
       {/* Hide the global nav on mobile, only while this page is mounted */}
@@ -60,7 +62,7 @@ export default function ResumeView() {
         >
           <ResumeDoodle
             src={`${RESUME_PATH}#toolbar=0&navpanes=0&view=FitH`}
-            title="Naresh Khatri — Résumé"
+            title={`${authorName} — Résumé`}
           />
         </motion.div>
       </div>

@@ -6,6 +6,15 @@ body {
   scroll-behavior: smooth;
 }
 
+/* Guard against any cached or lingering Chibi attribution links */
+a[href*="chibi3d"],
+a[href*="@chibi3d"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
