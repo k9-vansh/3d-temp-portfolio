@@ -207,6 +207,54 @@ export type Project = {
 };
 const projects: Project[] = [
   {
+    id: "agentops",
+    category: "AI Fleet Observability",
+    title: "AgentOps — Autonomous Fleet & Token Telemetry Platform",
+    src: "/assets/projects-screenshots/agentops/overview.png",
+    screenshots: ["overview.png", "landing.png"],
+    skills: {
+      frontend: [
+        PROJECT_SKILLS.ts,
+        PROJECT_SKILLS.react,
+        PROJECT_SKILLS.next,
+        PROJECT_SKILLS.tailwind,
+        PROJECT_SKILLS.shadcn,
+        PROJECT_SKILLS.reactQuery,
+      ],
+      backend: [
+        PROJECT_SKILLS.aiSDK,
+        PROJECT_SKILLS.node,
+      ],
+    },
+    live: "https://portfolio-dashboards-mocha.vercel.app",
+    github: "https://github.com/k9-vansh/portfolio-dashboards",
+    featured: true,
+    get content() {
+      return (
+        <div>
+          <TypographyP className="font-mono text-2xl text-center">
+            Enterprise observability, token cost governance, and deterministic orchestration for autonomous AI agent fleets.
+          </TypographyP>
+          <TypographyP className="font-mono">
+            Engineered with Next.js 16 (Turbopack), Tailwind CSS v4, Vercel AI SDK, and multi-tenant Clerk authentication with seamless 1-click Guest Demo access. Tracks real-time token stream throughput, sub-150ms inference latency budgets across frontier LLMs (Claude 3.7, GPT-4o, Gemini 2.5 Flash, DeepSeek R1), and dedicated GPU compute spend.
+          </TypographyP>
+          <ProjectsLinks live={this.live} repo={this.github} />
+
+          <TypographyH3 className="my-4 mt-8">Frontier Model Registry &amp; Diagnostic Copilot</TypographyH3>
+          <p className="font-mono mb-2">
+            Features an interactive autonomous Copilot with real-time tool execution simulation, dynamic speculative decoding benchmarks, and Kanban task scheduling for distributed agent workflows.
+          </p>
+          <SlideShow
+            images={[
+              `${BASE_PATH}/agentops/overview.png`,
+              `${BASE_PATH}/agentops/landing.png`,
+            ]}
+          />
+        </div>
+      );
+    },
+  },
+  {
     id: "codingducks",
     category: "Tactical Pathfinding",
     title: "Town Hall 14 Trajectory Calculator",
