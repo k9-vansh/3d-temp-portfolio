@@ -208,8 +208,8 @@ export type Project = {
 const projects: Project[] = [
   {
     id: "agentops",
-    category: "AI Fleet Observability",
-    title: "AgentOps — Autonomous Fleet & Token Telemetry Platform",
+    category: "Commercial AI Suite",
+    title: "AgentOps — Enterprise AI Fleet & Telemetry Platform",
     src: "/assets/projects-screenshots/agentops/overview.png",
     screenshots: ["overview.png", "landing.png"],
     skills: {
@@ -233,16 +233,16 @@ const projects: Project[] = [
       return (
         <div>
           <TypographyP className="font-mono text-2xl text-center">
-            Enterprise observability, token cost governance, and deterministic orchestration for autonomous AI agent fleets.
+            A proprietary turnkey AI telemetry suite and executive command center engineered for AI startups and enterprises deploying production LLMs.
           </TypographyP>
           <TypographyP className="font-mono">
-            Engineered with Next.js 16 (Turbopack), Tailwind CSS v4, Vercel AI SDK, and multi-tenant Clerk authentication with seamless 1-click Guest Demo access. Tracks real-time token stream throughput, sub-150ms inference latency budgets across frontier LLMs (Claude 3.7, GPT-4o, Gemini 2.5 Flash, DeepSeek R1), and dedicated GPU compute spend.
+            Engineered by Vansh Kumar to eliminate unmonitored API cost spikes, enforce sub-150ms inference latency budgets across frontier models (Claude 3.7, GPT-4o, Gemini 2.5, DeepSeek R1), and provide deterministic agent fleet orchestration. Built with Next.js 16 (Turbopack), Tailwind CSS v4, Vercel AI SDK, and multi-tenant Clerk authentication with seamless 1-click sales demo access. Available for bespoke client integration and custom software licensing.
           </TypographyP>
           <ProjectsLinks live={this.live} repo={this.github} />
 
-          <TypographyH3 className="my-4 mt-8">Frontier Model Registry &amp; Diagnostic Copilot</TypographyH3>
+          <TypographyH3 className="my-4 mt-8">Frontier Model Registry &amp; Autonomous Copilot</TypographyH3>
           <p className="font-mono mb-2">
-            Features an interactive autonomous Copilot with real-time tool execution simulation, dynamic speculative decoding benchmarks, and Kanban task scheduling for distributed agent workflows.
+            Features an autonomous Copilot with real-time tool execution simulation (`queryTelemetry`, `auditAgentFleets`), dynamic speculative decoding benchmarks, token spend guardrails, and Kanban task scheduling for distributed agent teams.
           </p>
           <SlideShow
             images={[
